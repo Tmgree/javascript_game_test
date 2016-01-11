@@ -5,7 +5,7 @@
   <title>Gamedev Canvas Workshop</title>
   <style>
   * { padding: 0; margin: 0; }
-  canvas { background: #eee; display: block; margin: 50px auto; }
+  canvas {  background: #eee; display: block; margin: 50px auto; }
   </style>
 </head>
 <body>
@@ -13,6 +13,7 @@
   <canvas id="myCanvas" width="480" height="320"></canvas>
 
   <script>
+
   // canvas
   var canvas = document.getElementById("myCanvas");
   var ctx = canvas.getContext("2d");
@@ -26,7 +27,7 @@
   var ballColor = "#0095DD";
 
   // paddle
-  var paddleHeight = 10;
+  var paddleHeight = 2;
   var paddleWidth = 75;
   var paddleX = (canvas.width-paddleWidth)/2;
   var rightPressed = false;
@@ -53,6 +54,7 @@ for(c=0; c<brickColumnCount; c++) {
   var score = 0;
   var lives = 3;
 
+
   function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -63,7 +65,7 @@ for(c=0; c<brickColumnCount; c++) {
     function drawPaddle() {
       ctx.beginPath();
       ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-      ctx.fillStyle = "#0095DD";
+      ctx.fillStyle = "black";
       ctx.fill();
       ctx.closePath();
     }
