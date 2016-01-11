@@ -1,3 +1,5 @@
+Brick Breaker
+
 Brick Breaker game built with Javascript running on Html5
 
 To install simply click download zip in the top right hand corner, unzip the file and open up index.html
