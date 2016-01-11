@@ -48,6 +48,9 @@ for(c=0; c<brickColumnCount; c++) {
     }
 }
 
+  //score
+  var score = 0;
+
   function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -96,6 +99,7 @@ for(c=0; c<brickColumnCount; c++) {
       drawBall();
       drawPaddle();
       drawBricks();
+      drawScore();
       collisionDetection();
       x += dx;
       y += dy;
@@ -106,7 +110,7 @@ for(c=0; c<brickColumnCount; c++) {
       };
       if(y + dy < ballRadius) {
         dy = -dy;
-      } else if(y + dy > canvas.height-ballRadius - paddleHeight - 0.25) {
+      } else if(y + dy > canvas.height-ballRadius - paddleHeight - 0.35) {
         if(x > paddleX && x < paddleX + paddleWidth) {
           dy = -1.1*dy;
           dx = 1.1*dx;
@@ -114,7 +118,7 @@ for(c=0; c<brickColumnCount; c++) {
         }
         else {
           dy
-          setTimeout(function() {alert("GAME OVER");  document.location.reload();},500);
+          setTimeout(function() {alert("GAME OVER, YOU SCORED " + score);  document.location.reload();},500);
 
         }
       }
@@ -153,19 +157,30 @@ for(c=0; c<brickColumnCount; c++) {
       }
     }
 
-    function collisionDetection() {
-    for(c=0; c<brickColumnCount; c++) {
-        for(r=0; r<brickRowCount; r++) {
-            var b = bricks[c][r];
-            if(b.status == 1) {
-               if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
-                   dy = -dy;
-                   ballColor = getRandomColor();
-                   b.status = 0;
-               }
-           }
-        }
-    }
+function collisionDetection() {
+  for(c=0; c<brickColumnCount; c++) {
+    for(r=0; r<brickRowCount; r++) {
+    var b = bricks[c][r];
+    if(b.status == 1) {
+        if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+           dy = -dy;
+           ballColor = getRandomColor();
+           b.status = 0;
+           score++;
+           if(score == brickRowCount*brickColumnCount) {
+                        alert("YOU WIN, CONGRATULATIONS!" + score);
+                        document.location.reload();
+                    }
+         }
+     }
+  }
+}
+}
+
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: "+score, 8, 20);
 }
 
     </script>
